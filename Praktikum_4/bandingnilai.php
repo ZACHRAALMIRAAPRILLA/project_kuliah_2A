@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contoh Form dengan POST</title>
+</head>
+<body>
+    <form action="pro_post_nilai.php" method="post">
+        BilI :
+        <input type="text" name="bil1" id="bil1"><br>
+        BilII :
+        <input type="text" name="bil2" id="bil2"><br>
+        <input type="submit" value="Bandingkan">
+    </form>
+</body>
+</html>
