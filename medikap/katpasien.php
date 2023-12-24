@@ -30,10 +30,10 @@ while ($record = mysqli_fetch_array($query)) {
                                     <div class="col-lg-6">
                                         <div class="form-floating mb-3">
                                             <select class="form-select" name="data diri" id="">
-                                                <option value="1">Nama</option>
-                                                <option value="2">Umur</option>
+                                                <option value="1">Umum</option>
+                                                <option value="2">Asuransi</option>
                                             </select>
-                                            <label for="floatingInput">Data Diri</label>
+                                            <label for="floatingInput">Jenis Pasien</label>
                                             <div class="invalid-feedback">
                                                 Masukkan Data Diri
                                             </div>
@@ -52,7 +52,7 @@ while ($record = mysqli_fetch_array($query)) {
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" name="input_katmenu_validate" value="12345">Save changes</button>
+                                        <button type="submit" class="btn btn-primary" name="input_katpasien_validate" value="12345">Save changes</button>
                                     </div>
                                 </form>
                         </div>
@@ -81,7 +81,7 @@ while ($record = mysqli_fetch_array($query)) {
                                         <div class="form-floating mb-3">
                                         <select class="form-select" aria-label="Default select example" required name="nama" id="">
                                                         <?php
-                                                        $data = array("Pulang","Rujukan", "Rawat Inap");
+                                                        $data = array("Rujukan", "Rawat Inap");
                                                         foreach ($data as $key => $value) {
                                                             if ($row['jenis_pasien'] == $key + 1) {
                                                                 echo "<option selected value=" . ($key + 1) . ">$value</option>";
@@ -99,7 +99,7 @@ while ($record = mysqli_fetch_array($query)) {
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="floatingInput" placeholder="Keluhan" name="katpasien" required value="<?php echo $row ['keluhan']?>">
+                                            <td><?php echo (isset($row['jenis_pasien']) && $row['jenis_pasien'] == 1) ? "Rujukan" : ((isset($row['jenis_pasien']) && $row['jenis_pasien'] == 2) ? "Rujukan" : "Rawat Inap"); ?></td>
                                             <label for="floatingInput">Keluhan</label>
                                             <div class="invalid-feedback">
                                                 Masukkan Keluhan

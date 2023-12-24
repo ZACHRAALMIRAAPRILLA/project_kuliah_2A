@@ -1,6 +1,6 @@
 <?php 
 include "proses/connect.php";
-$query = mysqli_query($conn, "SELECT * FROM tb_user WHERE username='$_SESSION[username_decafe]'");
+$query = mysqli_query($conn, "SELECT * FROM tb_user WHERE username='$_SESSION[username_medikaapp]'");
 $records = mysqli_fetch_array($query);
 ?>
 <nav class="navbar navbar-expand navbar-dark bg-success sticky-top">

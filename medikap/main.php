@@ -1,11 +1,11 @@
 <?php
     //session_start();
-    if(empty($_SESSION['username_decafe'])){
+    if(empty($_SESSION['username_medikaapp'])){
         header('location:login');
     }
 
     include "proses/connect.php";
-    $query = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$_SESSION[username_decafe]'");
+    $query = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$_SESSION[username_medikaapp]'");
     $hasil = mysqli_fetch_array($query);
 ?>
 <!doctype html>

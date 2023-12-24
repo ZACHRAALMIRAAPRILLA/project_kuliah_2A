@@ -4,15 +4,15 @@ date_default_timezone_set('Asia/Jakarta');
 $query = mysqli_query($conn, "SELECT tb_pemeriksaan.*,tb_pembayaran.*,nama, SUM(harga*jumlah) AS harganya FROM tb_pemeriksaan
     LEFT JOIN tb_user ON tb_user.id = tb_pemeriksaan.perawat
     LEFT JOIN tb_list_pemeriksaan ON tb_list_pemeriksaan.kode_pemeriksaan = tb_pemeriksaan.id_pemeriksaan
-    LEFT JOIN tb_riwayat_pasien ON tb_riwayat_pasien.id = tb_list_pemeriksaan.pasien
-    LEFT JOIN tb_pembayaran ON tb_pembayaran.id_pembayaran = tb_pemeriksaan.id_pemeriksaan
+    LEFT JOIN tb_riwayat_pasien ON tb_riwayat_pasien.id_pasien = tb_list_pemeriksaan.pasien
+    LEFT JOIN tb_pembayaran ON tb_pembayaran.id_bayar = tb_pemeriksaan.id_pemeriksaan
 
     GROUP BY id_pemeriksaan ORDER BY waktu_pemeriksaan DESC");
 while ($record = mysqli_fetch_array($query)) {
     $result[] = $record;
 }
 
-//$select_kat_pasien = mysqli_query($conn, "SELECT id_kat_pasien,kategori_menu FROM tb_kategori_pasien");
+//$select_kat_menu = mysqli_query($conn, "SELECT id_kat_menu,kategori_menu FROM tb_kategori_menu");
 ?>
 <div class="col-lg-9 mt-2">
     <div class="card">
@@ -22,15 +22,15 @@ while ($record = mysqli_fetch_array($query)) {
         <div class="card-body">
             <div class="row">
                 <div class="col d-flex justify-content-end">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalTambahUser"> Tambah Pasien Pemeriksaan</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalTambahUser"> Tambah Pemeriksaan</button>
                 </div>
             </div>
-            <!-- Modal Tambah Pasien Pemeriksaan Baru-->
+            <!-- Modal Tambah Order Baru-->
             <div class="modal fade" id="ModalTambahUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-fullscreen-md-down">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Pasien</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Pemeriksaan</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -50,7 +50,7 @@ while ($record = mysqli_fetch_array($query)) {
                                             <input type="number" class="form-control" id="ruangan" placeholder="Nomor Ruangan" name="ruangan" required>
                                             <label for="ruangan">Ruangan</label>
                                             <div class="invalid-feedback">
-                                                Masukkan No Ruangan
+                                                Masukkan Nomor Ruangan
                                             </div>
                                         </div>
                                     </div>
@@ -64,51 +64,52 @@ while ($record = mysqli_fetch_array($query)) {
                                         </div>
                                     </div>
                                 </div>
-                        </div>
+                        
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" name="input_order_validate" value="12345">Lakukan Pemeriksaan</button>
+                            <button type="submit" class="btn btn-primary" name="input_order_validate" value="12345">Buat Pemeriksaan</button>
                         </div>
                         </form>
+                        
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End Modal Tambah Pasien pemeriksaan Baru-->
+        <!-- End Modal Tambah Order Baru-->
         
         <?php
         if (empty($result)) {
-            echo "Data Pasien Pemeriksaan Tidak Ada";
+            echo " Data order tidak ada";
         } else {
             foreach ($result as $row) { 
                 ?>
 
                 <!-- Modal Edit-->
-                <div class="modal fade" id="ModalEdit<?php echo $row['id_pemeriksaan'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="ModalEdit<?php echo $row['id_order'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl modal-fullscreen-md-down">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Pasien Pemeriksaan</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Menu Makana dan Minuman</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form class="needs-validation" novalidate action="proses/proses_edit_pemeriksaan.php" method="POST">
+                                <form class="needs-validation" novalidate action="proses/proses_edit_order.php" method="POST">
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="form-floating mb-3">
-                                                <input readonly type="number" class="form-control" id="uploadFoto" name="kode_pemeriksaan" value="<?php echo $row['id_pemeriksaan'] ?>">
-                                                <label for="uploadFoto">Kode Pemeriksaan</label>
+                                                <input readonly type="number" class="form-control" id="uploadFoto" name="kode_order" value="<?php echo $row['id_order'] ?>">
+                                                <label for="uploadFoto">Kode Order</label>
                                                 <div class="invalid-feedback">
-                                                    Masukkan Kode Pemeriksaan
+                                                    Masukkan Kode Order
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-2">
                                             <div class="form-floating mb-3">
-                                                <input type="number" class="form-control" id="ruangan" placeholder="Nomor Ruangan" name="ruangan" required value="<?php echo $row['ruangan'] ?>">
-                                                <label for="ruangan">Ruangan</label>
+                                                <input type="number" class="form-control" id="meja" placeholder="Nomor Meja" name="meja" required value="<?php echo $row['meja'] ?>">
+                                                <label for="meja">Meja</label>
                                                 <div class="invalid-feedback">
-                                                    Masukkan Nomor Ruangan
+                                                    Masukkan Nomor Meja
                                                 </div>
                                             </div>
                                         </div>
@@ -124,7 +125,7 @@ while ($record = mysqli_fetch_array($query)) {
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" name="edit_order_validate" value="12345">Simpan</button>
+                                        <button type="submit" class="btn btn-primary" name="edit_pemerikaan_validate" value="12345">Simpan</button>
                                     </div>
                                 </form>
                             </div>
@@ -134,7 +135,7 @@ while ($record = mysqli_fetch_array($query)) {
                 <!-- End Modal Edit-->
 
                 <!-- Modal Delete-->
-                <div class="modal fade" id="ModalDelete<?php echo $row['id_order'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="ModalDelete<?php echo $row['id_pemeriksaan'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-md modal-fullscreen-md-down">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -143,13 +144,13 @@ while ($record = mysqli_fetch_array($query)) {
                             </div>
                             <div class="modal-body">
                                 <form class="needs-validation" novalidate action="proses/proses_delete_pemeriksaan.php" method="POST">
-                                    <input type="hidden" value="<?php echo $row['id_pemeriksaan'] ?>" name="kode_pemeriksaan">
+                                    <input type="hidden" value="<?php echo $row['id_order'] ?>" name="kode_order">
                                     <div class="col-lg-12">
-                                        Apakah anda ingin menghapus data pemeriksaan atas nama <b><?php echo $row['pelanggan'] ?></b> dengan kode pemeriksaan <b><?php echo $row['id_pemeriksaan'] ?></b>
+                                        Apakah anda ingin menghapus pemeriksaan atas nama <b><?php echo $row['pasien'] ?></b> dengan kode pemeriksaan <b><?php echo $row['id_pemeriksaan'] ?></b>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-danger" name="delete_pemerisaan_validate" value="12345">Hapus</button>
+                                        <button type="submit" class="btn btn-danger" name="delete_order_validate" value="12345">Hapus</button>
                                     </div>
                                 </form>
                             </div>
@@ -168,10 +169,10 @@ while ($record = mysqli_fetch_array($query)) {
                             <th scope="col">Kode Pemeriksaan</th>
                             <th scope="col">Pasien</th>
                             <th scope="col">Ruangan</th>
-                            <th scope="col">Total Pembayaran</th>
+                            <th scope="col">Total Harga</th>
                             <th scope="col">Perawat</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Waktu pemeriksaan</th>
+                            <th scope="col">Waktu Pemeriksaan</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -199,17 +200,17 @@ while ($record = mysqli_fetch_array($query)) {
                 <?php echo $row['nama'] ?>
             </td>
             <td>
-                <?php echo (!empty($row['id_pembayaran'])) ? "<span class='badge text-bg-success'>lunas</span>" : "" ; ?>
+                <?php echo (!empty($row['id_bayar'])) ? "<span class='badge text-bg-success'>dibayar</span>" : "" ; ?>
             </td>
             <td>
                 <?php echo $row['waktu_pemeriksaan'] ?>
             </td>
             <td>
                 <div class="d-flex">
-                    <a class="btn btn-info btn-sm me-1" href="./?x=pemeriksaanitem&pemeriksaan=<?php echo $row['id_pemeriksaan'] . "&ruangan=" . $row['ruangan'] . "&pasien=" . $row['pasien'] ?>"><i class="bi bi-eye"></i></a>
-                    <button class="<?php echo (!empty($row['id_pembayaran'])) ? "btn btn-secondary btn-sm me-1 disabled" : "btn btn-warning btn-sm me-1"; ?>" data-bs-toggle="modal" data-bs-target="#ModalEdit<?php echo $row['id_pemeriksaan'] ?>"><i class="bi bi-pencil-square"></i></button>
+                    <a class="btn btn-info btn-sm me-1" href="./?x=orderitem&order=<?php echo $row['id_pemeriksaan'] . "&ruangan=" . $row['ruangan'] . "&pasien=" . $row['pasien'] ?>"><i class="bi bi-eye"></i></a>
+                    <button class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-secondary btn-sm me-1 disabled" : "btn btn-warning btn-sm me-1"; ?>" data-bs-toggle="modal" data-bs-target="#ModalEdit<?php echo $row['id_pemeriksaan'] ?>"><i class="bi bi-pencil-square"></i></button>
                                             
-                                            <button class="<?php echo (!empty($row['id_pemeriksaan'])) ? "btn btn-secondary btn-sm me-1 disabled" : "btn btn-danger btn-sm me-1"; ?>" data-bs-toggle="modal" data-bs-target="#ModalDelete<?php echo $row['id_pemeriksaan'] ?>"><i class="bi bi-trash"></i></button>
+                                            <button class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-secondary btn-sm me-1 disabled" : "btn btn-danger btn-sm me-1"; ?>" data-bs-toggle="modal" data-bs-target="#ModalDelete<?php echo $row['id_pemeriksaan'] ?>"><i class="bi bi-trash"></i></button>
                 </div>
             </td>
             </tr>

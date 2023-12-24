@@ -7,9 +7,9 @@ include "connect.php";
         $query = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username' && password = '$password'");
         $hasil = mysqli_fetch_array($query);
         if($hasil){
-            $_SESSION['username_decafe'] = $username;
-            $_SESSION['level_decafe'] = $hasil['level'];
-            $_SESSION['id_decafe'] = $hasil['id'];
+            $_SESSION['username_medikaapp'] = $username;
+            $_SESSION['level_medikaapp'] = $hasil['level'];
+            $_SESSION['id_medikaapp'] = $hasil['id'];
 
             header('location:../home');
         }else{ ?>

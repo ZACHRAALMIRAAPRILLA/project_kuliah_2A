@@ -11,7 +11,7 @@ if (!empty($_POST['ubah_password_validate'])) {
     $hasil = mysqli_fetch_array($query);
     if ($hasil) {
         if($passwordbaru == $repasswordbaru){
-            $query = mysqli_query($conn, "UPDATE tb_user SET password='$passwordbaru' WHERE username = '$_SESSION[username_decafe]'");
+            $query = mysqli_query($conn, "UPDATE tb_user SET password='$passwordbaru' WHERE username = '$_SESSION[username_medikaapp]'");
             if($query){
                 $message = '<script>alert("Password berhasil diubah")
                             window.history.back()</script>

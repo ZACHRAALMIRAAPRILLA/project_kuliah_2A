@@ -1,18 +1,18 @@
 <?php
 include "proses/connect.php";
 date_default_timezone_set('Asia/Jakarta');
-$query = mysqli_query($conn, "SELECT tb_.*,tb_pempembayaranan.*,nama, SUM(harga*jumlah) AS harganya FROM tb_pemeriksaan
+$query = mysqli_query($conn, "SELECT tb_pemeriksaan.*,tb_pembayaran.*,nama, SUM(harga*jumlah) AS harganya FROM tb_pemeriksaan
     LEFT JOIN tb_user ON tb_user.id = tb_pemeriksaan.perawat
     LEFT JOIN tb_list_pemeriksaan ON tb_list_pemeriksaan.kode_pemeriksaan = tb_pemeriksaan.id_pemeriksaan
-    LEFT JOIN tb_daftar_pasien ON tb_daftar_pasien.id = tb_list_pemeriksaan.pasien
-    JOIN tb_pembayaran ON tb_pembayaran.id_pembayaran = tb_pemeriksaan.id_pemeriksaan
+    LEFT JOIN tb_riwayat_pasien ON tb_riwayat_pasien.id_pasien = tb_list_pemeriksaan.pasien
+    LEFT JOIN tb_pembayaran ON tb_pembayaran.id_bayar = tb_pemeriksaan.id_pemeriksaan
 
-    GROUP BY id_pemeriksaan PEMERIKSAAN BY waktu_pemeriksaan ASC");
+    GROUP BY id_pemeriksaan ORDER BY waktu_pemeriksaan DESC");
 while ($record = mysqli_fetch_array($query)) {
     $result[] = $record;
 }
 
-//$select_kat_pasien= mysqli_query($conn, "SELECT id_kat_menu,kategori_pasien FROM tb_kategori_pasien");
+//$select_kat_pasien = mysqli_query($conn, "SELECT id_kat_pasien,kategori_pasien FROM tb_kategori_pasien");
 ?>
 <div class="col-lg-9 mt-2">
     <div class="card">
@@ -53,13 +53,13 @@ while ($record = mysqli_fetch_array($query)) {
                             <tr>
                                 <th scope="row"><?php echo $no++ ?></th>
                                 <td>
-                                    <?php echo $row['id_Pemeriksaan'] ?>
+                                    <?php echo $row['id_pemeriksaan'] ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['waktu_Pemeriksaan'] ?>
+                                    <?php echo $row['waktu_pemeriksaan'] ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['waktu_pembayaran'] ?>
+                                    <?php echo $row['waktu_bayar'] ?>
                                 </td>
                                 </div>
                                 <td>
@@ -77,7 +77,7 @@ while ($record = mysqli_fetch_array($query)) {
             
             <td>
                 <div class="d-flex">
-                    <a class="btn btn-info btn-sm me-1" href="./?x=viewitem&Pemeriksaan=<?php echo $row['id_Pemeriksaan'] . "&ruangan=" . $row['ruangan'] . "&pasien=" . $row['pasien'] ?>"><i class="bi bi-eye"></i></a>
+                    <a class="btn btn-info btn-sm me-1" href="./?x=viewitem&pemeriksaan=<?php echo $row['id_pemeriksaan'] . "&ruangan=" . $row['ruangan'] . "&pasien=" . $row['pasien'] ?>"><i class="bi bi-eye"></i></a>
                 </div>
             </td>
             </tr>

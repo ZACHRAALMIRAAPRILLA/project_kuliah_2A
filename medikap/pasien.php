@@ -1,7 +1,7 @@
 <?php
 include "proses/connect.php";
-$query = mysqli_query($conn, "SELECT * FROM tb_daftar_pasien
-    LEFT JOIN tb_kategori_pasien On tb_kategori_pasien.id_kat_pasien = tb_daftar_pasien.kategori");
+$query = mysqli_query($conn, "SELECT * FROM tb_riwayat_pasien
+    LEFT JOIN tb_kategori_pasien On tb_kategori_pasien.id_kat_pasien = tb_riwayat_pasien.kategori");
 while ($record = mysqli_fetch_array($query)) {
     $result[] = $record;
 }
@@ -151,7 +151,7 @@ $select_kat_menu = mysqli_query($conn, "SELECT id_kat_pasien,kategori_pasien FRO
                                             </select>
                                             <label for="floatingInput">Kategori </label>
                                             <div class="invalid-feedback">
-                                                Pilih Kategori Pulang, Rujukan atau Rawat Inap
+                                                Pilih Kategori Pulang atau Rawat Inap
                                             </div>
                                         </div>
                                     </div>
@@ -235,7 +235,7 @@ $select_kat_menu = mysqli_query($conn, "SELECT id_kat_pasien,kategori_pasien FRO
                                             </select>
                                             <label for="floatingInput">Kategori Pulang, Rujukan atau Rawat Inap</label>
                                             <div class="invalid-feedback">
-                                                Pilih Kategori Pulang, Rujukan atau Rawat Inap
+                                                Pilih Kategori  Rujukan atau Rawat Inap
                                             </div>
                                         </div>
                                     </div>
@@ -319,7 +319,7 @@ $select_kat_menu = mysqli_query($conn, "SELECT id_kat_pasien,kategori_pasien FRO
                 </td>
                 <td><?php echo $row['nama_pasien'] ?></td>
                 <td><?php echo $row['keterangan'] ?></td>
-                <td><?php echo ($row['jenis_pasien'] == 1) ? "Pulang" : "Rujukan" , "Rawat Inap" ?></td> 
+                <td><?php echo ($row['jenis_pasien'] == 1) ?></td> 
                 <td><?php echo $row['kategori_menu'] ?></td>
                 <td><?php echo $row['harga'] ?></td>
                 <td><?php echo $row['stok'] ?></td>

@@ -17,7 +17,7 @@ while ($record = mysqli_fetch_array($query)) {
     $result[] = $record;
 }
 
-$select_menu = mysqli_query($conn, "SELECT id,nama_pasien FROM tb_riwayat_pasien");
+$select_pasien = mysqli_query($conn, "SELECT id,nama_pasien FROM tb_riwayat_pasien");
 ?>
 <div class="col-lg-9 mt-2">
     <div class="card">
@@ -29,7 +29,7 @@ $select_menu = mysqli_query($conn, "SELECT id,nama_pasien FROM tb_riwayat_pasien
             <div class="row">
                 <div class="col-lg-3">
                     <div class="form-floating mb-3">
-                        <input disabled type="text" class="form-control" id="kodeorder" value="<?php echo $kode; ?>">
+                        <input disabled type="text" class="form-control" id="kode_pemerksaan" value="<?php echo $kode; ?>">
                         <label for="uploadFoto">Kode Pemeriksaan</label>
                     </div>
                 </div>

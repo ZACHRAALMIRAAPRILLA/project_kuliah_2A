@@ -1,6 +1,6 @@
 <?php
     //session_start();
-    if(!empty($_SESSION['username_decafe'])){
+    if(!empty($_SESSION['username_medikaapp'])){
         header('location:home');
     }
 ?>
@@ -135,6 +135,8 @@
             <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit_validate" value="abc">Login</button>
             <php class="mt-5 mb-3 text-body-secondary">&copy; 2022 - <?php echo date("Y") ?></p>
         </form>
+        <p>Username : admin@admin.com <br>
+           Password : password</p>
     </main>
 
     <script>

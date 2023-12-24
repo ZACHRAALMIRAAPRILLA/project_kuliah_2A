@@ -3,9 +3,9 @@
                 if(isset($_GET['x']) && $_GET['x']=='home'){
                     $page = "home.php";
                     include "main.php";
-                }elseif(isset($_GET['x']) && $_GET['x']=='order'){
-                    if($_SESSION['level_decafe']==1 || $_SESSION['level_decafe']==3) {
-                    $page = "order.php";
+                }elseif(isset($_GET['x']) && $_GET['x']=='pemeriksaan'){
+                    if($_SESSION['level_medikaapp']==1 || $_SESSION['level_medikaapp']==3) {
+                    $page = "pemeriksaan.php";
                     include "main.php";
                 }else{
                     $page = "home.php";
@@ -13,7 +13,7 @@
                 }
 
                 }elseif(isset($_GET['x']) && $_GET['x']=='user'){
-                    if($_SESSION['level_decafe']==1){
+                    if($_SESSION['level_medikaapp']==1){
                         $page = "user.php";
                         include "main.php";
                     }else{
@@ -21,9 +21,9 @@
                         include "main.php";
                     }
 
-                }elseif(isset($_GET['x']) && $_GET['x']=='dapur'){
-                    if($_SESSION['level_decafe']==1 || $_SESSION['level_decafe']==4) {
-                    $page = "dapur.php";
+                }elseif(isset($_GET['x']) && $_GET['x']=='dokter'){
+                    if($_SESSION['level_medikaapp']==1 || $_SESSION['level_medikaapp']==4) {
+                    $page = "dokter.php";
                     include "main.php";
                 }else{
                     $page = "home.php";
@@ -32,7 +32,7 @@
 
                 }elseif(isset($_GET['x']) && $_GET['x']=='report'){
 
-                    if($_SESSION['level_decafe']==1){
+                    if($_SESSION['level_medikaapp']==1){
                         $page = "report.php";
                         include "main.php";
                     }else{
@@ -41,9 +41,9 @@
                     }
 
 
-                }elseif(isset($_GET['x']) && $_GET['x']=='menu'){
-                    if($_SESSION['level_decafe']==1 || $_SESSION['level_decafe']==3) {
-                    $page = "menu.php";
+                }elseif(isset($_GET['x']) && $_GET['x']=='pasien'){
+                    if($_SESSION['level_medikaapp']==1 || $_SESSION['level_medikapp']==3) {
+                    $page = "pasien.php";
                     include "main.php";
                 }else{
                     $page = "home.php";
@@ -56,26 +56,26 @@
                     include "proses/proses_logout.php";
 
 
-                }elseif(isset($_GET['x']) && $_GET['x']=='katmenu'){
-                    if($_SESSION['level_decafe']==1) {
-                    $page = "katmenu.php";
+                }elseif(isset($_GET['x']) && $_GET['x']=='katpasien'){
+                    if($_SESSION['level_medikaapp']==1) {
+                    $page = "katpasien.php";
                     include "main.php";
                 }else{
                     $page = "home.php";
                     include "main.php";
                 }
 
-                }elseif(isset($_GET['x']) && $_GET['x']=='orderitem'){
-                    if($_SESSION['level_decafe']==1 || $_SESSION['level_decafe']==3) {
-                    $page = "order_item.php";
+                }elseif(isset($_GET['x']) && $_GET['x']=='pemeriksaanitem'){
+                    if($_SESSION['level_medikaapp']==1 || $_SESSION['level_medikaapp']==3) {
+                    $page = "pemeriksaanitem.php";
                     include "main.php";
                 }else{
                     $page = "home.php";
                     include "main.php";
                 }
 
-                }elseif(isset($_GET['x']) && $_GET['x']=='viewitem'){
-                    if($_SESSION['level_decafe']==1) {
+                }elseif(isset($_GET['x']) && $_GET['x']=='view_item'){
+                    if($_SESSION['level_medikaapp']==1) {
                     $page = "view_item.php";
                     include "main.php";
                 }else{

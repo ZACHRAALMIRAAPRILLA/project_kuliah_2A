@@ -6,7 +6,7 @@ $nohp = (isset($_POST['nohp'])) ? htmlentities($_POST['nohp']) : "";
 $alamat = (isset($_POST['alamat'])) ? htmlentities($_POST['alamat']) : "";
 
 if (!empty($_POST['ubah_profile_validate'])) {
-            $query = mysqli_query($conn, "UPDATE tb_user SET nama='$nama', nohp='$nohp', alamat='$alamat' WHERE username = '$_SESSION[username_decafe]'");
+            $query = mysqli_query($conn, "UPDATE tb_user SET nama='$nama', nohp='$nohp', alamat='$alamat' WHERE username = '$_SESSION[username_medikaapp]'");
             if($query){
                 $message = '<script>alert("Data profile berhasil diupdate");
                 window.history.back()</script>';
